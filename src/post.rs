@@ -6,7 +6,7 @@ use regex::Regex;
 use rocket_contrib::json::JsonValue;
 use serde::{Deserialize, Serialize};
 
-pub fn retrieve_posts() -> Option<JsonValue> {
+pub fn retrieve_all() -> Option<JsonValue> {
     let mut posts: Vec<JsonValue> = fs::read_dir("posts")
         .ok()?
         .filter_map(|entry| Some(entry.ok()?.path()))
@@ -19,6 +19,14 @@ pub fn retrieve_posts() -> Option<JsonValue> {
     posts.reverse();
 
     Some(json!({ "posts": posts }))
+}
+
+pub fn get(name: String) -> Option<JsonValue> {
+    let path = Path::new("posts").join(name + ".md");
+    match path.is_file() {
+        true => Post::read_post(&path).map(|p| json!({ "post": Into::<JsonValue>::into(p) })),
+        false => None,
+    }
 }
 
 #[derive(Clone, Debug, Serialize, Deserialize)]

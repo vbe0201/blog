@@ -13,12 +13,17 @@ mod post;
 
 use std::path::{Path, PathBuf};
 
-use rocket::response::NamedFile;
+use rocket::response::{NamedFile, Redirect};
 use rocket_contrib::templates::Template;
 
 #[get("/")]
 fn index() -> Template {
-    Template::render("index", post::retrieve_posts().unwrap())
+    Template::render("index", post::retrieve_all().unwrap())
+}
+
+#[get("/blog")]
+fn blog() -> Redirect {
+    Redirect::to("/")
 }
 
 #[get("/<file..>")]
@@ -26,10 +31,16 @@ fn css(file: PathBuf) -> Option<NamedFile> {
     NamedFile::open(Path::new("css/").join(file)).ok()
 }
 
+#[get("/<file>")]
+fn post(file: String) -> Option<Template> {
+    Some(Template::render("post", post::get(file)?))
+}
+
 fn main() {
     rocket::ignite()
         .attach(Template::fairing())
-        .mount("/", routes![index])
-        .mount("/css", routes![css])
+        .mount("/", routes![index, blog])
+        .mount("/css/", routes![css])
+        .mount("/blog/", routes![post])
         .launch();
 }

@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta property="og:title" content="{{post.title}}" />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Vale's blog" />
+    <meta property="og:description" content="Blog post from {{post.date}}">
+
+    <title>{{post.title}}</title>
+
+    <link rel="stylesheet" href="/css/style.css" media="all">
+</head>
+
+<body>
+    {{> sticky}}
+    <article>
+        {{{post.body}}}
+    </article>
+</body>
+</html>
