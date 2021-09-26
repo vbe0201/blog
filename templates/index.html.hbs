@@ -1,0 +1,25 @@
+<html>
+<head>
+    <meta charset="UTF-8" />
+    <meta property="og:title" content="Home" />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Vale's blog" />
+    <meta property="og:description" content="Obscure technology, what would you expect">
+
+    <title>Vale's blog | obscure.technology</title>
+
+    <link rel="stylesheet" href="/css/style.css" media="all">
+</head>
+
+<body>
+    {{> sticky}}
+    <h3 class="post-item-note" aria-label="Recent Posts">Recent Posts</h3>
+    {{#each posts}}
+        <article class="post-item">
+            <span class="post-item-date">{{date}}</span>
+            <h4 class="post-item-title">
+                <a href="/blog/{{name}}">{{title}}</a>
+            </h4>
+    {{/each}}
+</body>
+</html>

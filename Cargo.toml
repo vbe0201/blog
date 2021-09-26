@@ -12,5 +12,6 @@ chrono = { version = "0.4", features = ["serde"] }
 comrak = "0.12"
 lazy_static = "1.4"
 regex = "1.5"
-rocket = { version = "0.5.0-rc.1", features = ["json"] }
+rocket = { version = "0.4.10" }
+rocket_contrib = { version = "0.4.10", features = ["handlebars_templates", "json"] }
 serde = { version = "1.0", features = ["derive"] }

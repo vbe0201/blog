@@ -3,26 +3,27 @@ use std::{fs, path::Path};
 use chrono::{DateTime, TimeZone, Utc};
 use comrak::{markdown_to_html, ComrakOptions};
 use regex::Regex;
-use rocket::serde::json::Json;
+use rocket_contrib::json::JsonValue;
 use serde::{Deserialize, Serialize};
 
-pub fn retrieve_posts() -> Option<Json<Vec<Post>>> {
-    let mut posts: Vec<_> = fs::read_dir("posts")
+pub fn retrieve_posts() -> Option<JsonValue> {
+    let mut posts: Vec<JsonValue> = fs::read_dir("posts")
         .ok()?
         .filter_map(|entry| Some(entry.ok()?.path()))
         .filter(|path| path.is_file() && path.extension().unwrap_or_default() == "md")
-        .filter_map(|path| Post::read_post(&path))
+        .filter_map(|path| Post::read_post(&path).map(Into::into))
         .collect();
 
     // Sort all the posts. We want the most recent ones first.
-    posts.sort_by_key(|p| p.date.timestamp());
+    posts.sort_by_key(|p| p["timestamp"].as_i64());
     posts.reverse();
 
-    Some(Json(posts))
+    Some(json!({ "posts": posts }))
 }
 
 #[derive(Clone, Debug, Serialize, Deserialize)]
 pub struct Post {
+    name: String,
     title: String,
     #[serde(with = "chrono::serde::ts_seconds")]
     date: DateTime<Utc>,
@@ -32,14 +33,27 @@ pub struct Post {
 impl Post {
     pub fn read_post(path: &Path) -> Option<Self> {
         let contents = fs::read_to_string(path).ok()?;
-        Self::try_parse(&contents)
+        Self::try_parse(path, &contents)
     }
 
-    fn try_parse(md: &str) -> Option<Self> {
+    fn try_parse(path: &Path, md: &str) -> Option<Self> {
         Some(Post {
+            name: path.file_stem()?.to_str()?.to_owned(),
             title: extract_post_title(md)?,
             date: Utc.timestamp(extract_post_timestamp(md)?, 0),
             body: render_post(md)?,
+        })
+    }
+}
+
+impl From<Post> for JsonValue {
+    fn from(post: Post) -> Self {
+        json!({
+            "name": post.name,
+            "title": post.title,
+            "date": post.date.format("%d %B %Y").to_string(),
+            "timestamp": post.date.timestamp(),
+            "body": post.body,
         })
     }
 }
@@ -60,12 +74,11 @@ fn extract_post_timestamp(md: &str) -> Option<i64> {
     RE.captures(md)?.get(1)?.as_str().parse::<i64>().ok()
 }
 
-fn render_post<P: AsRef<Path>>(path: P) -> Option<String> {
-    let post = fs::read_to_string(path).ok()?;
+fn render_post(post: &str) -> Option<String> {
     let mut options = ComrakOptions::default();
 
     options.extension.strikethrough = true;
     //options.render.unsafe_ = true;
 
-    Some(markdown_to_html(&post, &options))
+    Some(markdown_to_html(post, &options))
 }
