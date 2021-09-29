@@ -95,3 +95,7 @@ h1 {
   font-weight: 600;
   opacity: 1 !important;
 }
+
+.c-post-item-note {
+  font-size: var(--normal-size);
+}

@@ -13,12 +13,21 @@
 </head>
 
 <body>
+    <div class="c-navbar" role="navigation">
+        <nav class="c-navbar__menu">
+            <ul class="c-navbar__links">
+                <li class="l-navbar__item"><a href="/" class="c-navbar__link u-active">home</a></li>
+                <li class="l-navbar__item"><a href="/about" class="c-navbar__link">about</a></li>
+                <li class="l-navbar__item"><a href="" class="c-navbar__link"></a></li>
+            </ul>
+        </nav>
+    </div>
     {{> sticky}}
-    <h3 class="post-item-note" aria-label="Recent Posts">Recent Posts</h3>
+    <h3 class="c-post-item-note" aria-label="Recent Posts">Recent Posts</h3>
     {{#each posts}}
-        <article class="post-item">
-            <span class="post-item-date">{{date}}</span>
-            <h4 class="post-item-title">
+        <article class="c-post-item">
+            <span class="c-post-item__date">{{date}}</span>
+            <h4 class="c-post-item__title">
                 <a href="/blog/{{name}}">{{title}}</a>
             </h4>
     {{/each}}
