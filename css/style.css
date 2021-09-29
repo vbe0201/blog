@@ -12,7 +12,7 @@
   --normal-size: 1.6rem;
 }
 
-body[data-theme="dark"] {
+body[dark] {
   --background-color: #131418;
   --color: #c7bebe;
   --title-color: #eaeaea;
@@ -56,18 +56,16 @@ h1 {
   font-size: var(--h1-size);
 }
 
+a {
+  cursor: pointer;
+}
+
 .c-navbar {
   display: block;
   max-width: 90rem;
   margin: 0 auto;
   padding: 1.5rem 3rem;
   border-bottom: 0.1rem solid var(--border-color);
-}
-
-.c-navbar:after {
-  content: "";
-  display: table;
-  clear: both;
 }
 
 .c-navbar .c-navbar__links {
@@ -91,6 +89,12 @@ h1 {
   opacity: 0.7;
 }
 
+.c-navbar:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
 .u-active {
   font-weight: 600;
   opacity: 1 !important;
@@ -98,4 +102,14 @@ h1 {
 
 .c-post-item-note {
   font-size: var(--normal-size);
+}
+
+.c-sun__svg {
+  margin: auto;
+  height: 2.4rem;
+  width: 2.4rem;
+}
+
+#sun {
+  min-height: 100%;
 }
