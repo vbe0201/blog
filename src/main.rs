@@ -27,8 +27,8 @@ fn blog() -> Redirect {
 }
 
 #[get("/<file..>")]
-fn css(file: PathBuf) -> Option<NamedFile> {
-    NamedFile::open(Path::new("css/").join(file)).ok()
+fn assets(file: PathBuf) -> Option<NamedFile> {
+    NamedFile::open(Path::new("assets/").join(file)).ok()
 }
 
 #[get("/<file>")]
@@ -40,7 +40,7 @@ fn main() {
     rocket::ignite()
         .attach(Template::fairing())
         .mount("/", routes![index, blog])
-        .mount("/css/", routes![css])
+        .mount("/assets/", routes![assets])
         .mount("/blog/", routes![post])
         .launch();
 }
