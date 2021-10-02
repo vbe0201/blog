@@ -7,6 +7,7 @@
   --title-color: #0d122b;
   --selection-background-color: #fffba0;
   --selection-color: #0d122b;
+  --unimportant-color: #767F86;
   --border-color: #ececec;
   --link-color: #003fff;
   --link-color-hover: #0036c7;
@@ -22,12 +23,18 @@ body[dark] {
   --border-color: #1b1d25;
   --link-color: #ff5277;
   --link-color-hover: #ff2957;
+  --unimportant-color: #6B7886;
 }
 
 * {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
+  -webkit-transition: background-color 75ms ease-in, border-color 75ms ease-in;
+  -moz-transition: background-color 75ms ease-in, border-color 75ms ease-in;
+  -ms-transition: background-color 75ms ease-in, border-color 75ms ease-in;
+  -o-transition: background-color 75ms ease-in, border-color 75ms ease-in;
+  transition: background-color 75ms ease-in, border-color 75ms ease-in;
 }
 
 body {
@@ -204,6 +211,11 @@ a {
   margin-bottom: 5rem;
 }
 
+.c-post-header > span {
+  font-size: var(--normal-size);
+  color: var(--unimportant-color);
+}
+
 .c-page-content > p,
 .c-post-content > p {
   font-size: var(--normal-size);
@@ -285,9 +297,9 @@ a {
 }
 
 .c-not-found__title {
-    font-size: calc(var(--h1-size) * 3);
-    font-weight: 700;
-    margin-bottom: 2rem;
+  font-size: calc(var(--h1-size) * 3);
+  font-weight: 700;
+  margin-bottom: 2rem;
 }
 
 .c-footer {
