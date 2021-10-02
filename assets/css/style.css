@@ -8,6 +8,8 @@
   --selection-background-color: #fffba0;
   --selection-color: #0d122b;
   --border-color: #ececec;
+  --link-color: #003fff;
+  --link-color-hover: #0036c7;
   --h1-size: 3.2rem;
   --h2-size: 2.72rem;
   --normal-size: 1.6rem;
@@ -18,6 +20,8 @@ body[dark] {
   --color: #c7bebe;
   --title-color: #eaeaea;
   --border-color: #1b1d25;
+  --link-color: #ff5277;
+  --link-color-hover: #ff2957;
 }
 
 * {
@@ -108,15 +112,11 @@ a {
 }
 
 .c-navbar:after,
-.l-wrapper {
+.l-wrapper,
+.c-post-item:after {
   content: "";
   display: table;
   clear: both;
-}
-
-.u-active {
-  font-weight: 600;
-  opacity: 1 !important;
 }
 
 .c-post-item-note {
@@ -174,10 +174,11 @@ a {
   display: flex;
   font-size: var(--normal-size);
   border-top: 1px solid var(--border-color);
-  padding: 0.5rem 0;
+  padding: 1rem 0;
 }
 
 .c-post-item__date {
+  float: left;
   margin-right: 0.6rem;
   color: var(--title-color);
   font-weight: 700;
@@ -190,6 +191,103 @@ a {
 
 .c-post-item__title > a:hover {
   color: var(--title-color);
+}
+
+.c-about-header {
+  margin-top: 10rem;
+  margin-bottom: 5rem;
+  text-align: center;
+}
+
+.c-post-header {
+  margin-top: 10rem;
+  margin-bottom: 5rem;
+}
+
+.c-page-content > p,
+.c-post-content > p {
+  font-size: var(--normal-size);
+  font-weight: 400;
+  padding: 1.5rem 0;
+  line-height: 3rem;
+}
+
+.c-page-content > * a,
+.c-post-content > * a {
+  text-decoration: none;
+  color: var(--link-color);
+}
+
+.c-page-content > * a:hover,
+.c-post-content > * a:hover {
+  color: var(--link-color-hover);
+}
+
+.l-wrapper > * a:active,
+.l-wrapper > * a:focus,
+.l-navbar__item > a:active,
+.l-navbar__item > a:focus,
+.c-post-content > * a:active,
+.c-post-content > * a:focus {
+  border: 0.4rem solid var(--link-color);
+}
+
+.c-post-content > h1 {
+  font-size: 3.5rem;
+}
+
+.c-post-content > h2 {
+  font-size: 2.2rem;
+  margin-top: 3rem;
+}
+
+.c-post-content > h3 {
+  font-size: 2rem;
+  margin-top: 3rem;
+  padding-bottom: 0.4rem;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.c-about-links,
+.c-post-content > ul {
+  margin-left: 3rem;
+  list-style: none;
+}
+
+.c-about-links > li,
+.c-post-content > ul > li {
+  font-size: var(--normal-size);
+  line-height: 3rem;
+}
+
+.c-about-links > li::before,
+.c-post-content > ul > li::before {
+  content: "\FE63";
+  margin-left: -1.3rem;
+}
+
+.c-post-content > * img {
+  max-width: 100%;
+  vertical-align: center;
+  -webkit-user-drag: none;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.c-not-found {
+  display: flex;
+  align-content: center;
+  justify-content: center;
+  flex-direction: column;
+  text-align: center;
+  margin: auto;
+  height: 50vh;
+}
+
+.c-not-found__title {
+    font-size: calc(var(--h1-size) * 3);
+    font-weight: 700;
+    margin-bottom: 2rem;
 }
 
 .c-footer {

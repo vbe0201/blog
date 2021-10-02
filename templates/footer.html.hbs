@@ -1,0 +1,16 @@
+<footer class="c-footer">
+    <span class="c-footer__item">&copy; 2021 Valentin B.</span>
+</footer>
+<script>
+    // element is only loaded here
+    const sun = document.getElementById("sun");
+    sun.onclick = () => {
+        if (localStorage.getItem("theme") === "dark") {
+            setLocalStorage(null);
+            setTheme(localStorage.getItem("theme"));
+        } else {
+            setLocalStorage("dark");
+            setTheme(localStorage.getItem("theme"));
+        };
+    };
+</script>

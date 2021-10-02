@@ -11,9 +11,15 @@ extern crate rocket_contrib;
 
 mod post;
 
-use std::path::{Path, PathBuf};
+use std::{
+    collections::HashMap,
+    path::{Path, PathBuf},
+};
 
-use rocket::response::{NamedFile, Redirect};
+use rocket::{
+    response::{NamedFile, Redirect},
+    Request,
+};
 use rocket_contrib::templates::Template;
 
 #[get("/")]
@@ -21,14 +27,30 @@ fn index() -> Template {
     Template::render("index", post::retrieve_all().unwrap())
 }
 
+#[get("/")]
+fn about() -> Template {
+    let context: HashMap<&str, &str> = HashMap::new();
+    Template::render("about", &context)
+}
+
 #[get("/blog")]
 fn blog() -> Redirect {
     Redirect::to("/")
 }
 
-#[get("/<file..>")]
-fn assets(file: PathBuf) -> Option<NamedFile> {
-    NamedFile::open(Path::new("assets/").join(file)).ok()
+#[get("/img/<file..>")]
+fn images(file: PathBuf) -> Option<NamedFile> {
+    NamedFile::open(Path::new("assets/img").join(file)).ok()
+}
+
+#[get("/favicon/<file..>")]
+fn favicon(file: PathBuf) -> Option<NamedFile> {
+    NamedFile::open(Path::new("assets/favicon").join(file)).ok()
+}
+
+#[get("/css/<file..>")]
+fn css(file: PathBuf) -> Option<NamedFile> {
+    NamedFile::open(Path::new("assets/css").join(file)).ok()
 }
 
 #[get("/<file>")]
@@ -36,11 +58,19 @@ fn post(file: String) -> Option<Template> {
     Some(Template::render("post", post::get(file)?))
 }
 
+#[catch(404)]
+fn not_found() -> Template {
+    let context: HashMap<&str, &str> = HashMap::new();
+    Template::render("404", &context)
+}
+
 fn main() {
     rocket::ignite()
         .attach(Template::fairing())
         .mount("/", routes![index, blog])
-        .mount("/assets/", routes![assets])
+        .mount("/about", routes![about])
+        .mount("/assets/", routes![css, images, favicon])
         .mount("/blog/", routes![post])
+        .register(catchers![not_found])
         .launch();
 }
