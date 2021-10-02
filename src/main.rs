@@ -18,7 +18,6 @@ use std::{
 
 use rocket::{
     response::{NamedFile, Redirect},
-    Request,
 };
 use rocket_contrib::templates::Template;
 
