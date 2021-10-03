@@ -1,7 +1,7 @@
 use std::{fs, path::Path};
 
 use chrono::{DateTime, TimeZone, Utc};
-use comrak::{markdown_to_html, ComrakOptions};
+use comrak::{markdown_to_html_with_plugins, plugins::syntect::SyntectAdapter, ComrakOptions, ComrakPlugins};
 use regex::Regex;
 use rocket_contrib::json::JsonValue;
 use serde::{Deserialize, Serialize};
@@ -83,10 +83,14 @@ fn extract_post_timestamp(md: &str) -> Option<i64> {
 }
 
 fn render_post(post: &str) -> Option<String> {
+    let adapter = SyntectAdapter::new("base16-ocean.dark");
     let mut options = ComrakOptions::default();
+    let mut plugins = ComrakPlugins::default();
+
+    plugins.render.codefence_syntax_highlighter = Some(&adapter);
 
     options.extension.strikethrough = true;
     options.render.unsafe_ = true;
 
-    Some(markdown_to_html(post, &options))
+    Some(markdown_to_html_with_plugins(post, &options, &plugins))
 }
