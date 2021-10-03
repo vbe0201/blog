@@ -86,7 +86,7 @@ fn render_post(post: &str) -> Option<String> {
     let mut options = ComrakOptions::default();
 
     options.extension.strikethrough = true;
-    //options.render.unsafe_ = true;
+    options.render.unsafe_ = true;
 
     Some(markdown_to_html(post, &options))
 }

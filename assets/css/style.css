@@ -314,6 +314,28 @@ a {
   text-align: center;
 }
 
+.c-post-content .anchor-head {
+  position: relative;
+  opacity: 0;
+  outline: none;
+}
+
+.c-post-content .anchor-head::before {
+  position: absolute;
+  right: -0.3rem;
+  content: "#";
+  width: 2rem;
+  font-weight: 700;
+  margin-left: 0.3rem;
+}
+
+.c-post-content h1:hover .anchor-head,
+.c-post-content h2:hover .anchor-head,
+.c-post-content h3:hover .anchor-head,
+.c-post-content h4:hover .anchor-head {
+  opacity: 1;
+}
+
 .c-not-found {
   display: flex;
   align-content: center;

@@ -18,7 +18,10 @@ so let's take a closer look at how the security of these devices was defeated an
 secure them properly. In this first part of multiple articles, let's look at how the previously mentioned TSEC firmware
 motivated Falcon hacking and how it was defeated.
 
-## Homebrew on the Horizon
+<h2 id="homebrew-on-the-horizon">
+<a href="#homebrew-on-the-horizon" class="anchor-head"></a>
+Homebrew on the Horizon
+</h2>
 
 In the earlier days of Nintendo Switch hacking, the entrypoints to homebrew were rather rudimentary and only provided
 a very limited amount of system resources to be used by the developers of these unsigned and unauthorized pieces of
