@@ -13,4 +13,18 @@
             setTheme(localStorage.getItem("theme"));
         };
     };
+
+    const trigger = document.getElementById("popup-trigger");
+    const navbar = document.getElementsByClassName("c-navbar__links")[0];
+    const wrapper = document.getElementsByClassName("l-wrapper")[0];
+    trigger.onclick = () => {
+        console.log("Moin");
+        if (!navbar.getAttribute("popup")) {
+            navbar.setAttribute("popup", true);
+            wrapper.classList.remove("blurry");
+        } else {
+            navbar.removeAttribute("popup");
+            wrapper.classList.add("blurry");
+        }
+    }
 </script>
