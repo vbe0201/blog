@@ -7,7 +7,7 @@
   --title-color: #0d122b;
   --selection-background-color: #fffba0;
   --selection-color: #0d122b;
-  --unimportant-color: #767F86;
+  --unimportant-color: #767f86;
   --border-color: #ececec;
   --link-color: #003fff;
   --link-color-hover: #0036c7;
@@ -23,7 +23,7 @@ body[dark] {
   --border-color: #1b1d25;
   --link-color: #ff5277;
   --link-color-hover: #ff2957;
-  --unimportant-color: #6B7886;
+  --unimportant-color: #6b7886;
 }
 
 * {
@@ -104,7 +104,7 @@ a {
 
 .c-navbar .l-navbar__item {
   display: inline-block;
-  padding: 0.7rem 1rem;
+  padding: 0.5rem 1rem;
 }
 
 .c-navbar .l-navbar__item:not(:last-child) {
@@ -131,9 +131,12 @@ a {
 }
 
 .c-sun__svg {
-  margin: auto;
-  height: 2.4rem;
-  width: 2.4rem;
+  display: inline-block;
+  fill: var(--title-color);
+  transition: fill 75ms ease-in;
+  height: 2.5rem;
+  width: 2.5rem;
+  margin-top: 0.3rem;
 }
 
 .l-wrapper {
@@ -250,7 +253,7 @@ a {
 .l-navbar__item > a,
 .c-post-content > * a,
 .c-post-content > * a {
-  border: 0.4rem solid transparent; 
+  border: 0.4rem solid transparent;
 }
 
 .c-post-content > h1 {
