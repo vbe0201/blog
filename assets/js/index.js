@@ -21,7 +21,6 @@
   const wrapper = document.getElementsByClassName("l-wrapper")[0];
 
   trigger.onclick = () => {
-    console.log("Moin");
     if (!navbar.getAttribute("popup")) {
       navbar.setAttribute("popup", true);
       wrapper.classList.remove("blurry");

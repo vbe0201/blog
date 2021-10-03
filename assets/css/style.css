@@ -53,6 +53,11 @@ body {
   width: 100wh;
 }
 
+pre {
+    font-size: var(--normal-size);
+    overflow-x: scroll;
+}
+
 h1,
 h2,
 h3,
