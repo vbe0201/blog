@@ -16,9 +16,7 @@ use std::{
     path::{Path, PathBuf},
 };
 
-use rocket::{
-    response::{NamedFile, Redirect},
-};
+use rocket::response::{NamedFile, Redirect};
 use rocket_contrib::templates::Template;
 
 #[get("/")]
@@ -52,6 +50,11 @@ fn css(file: PathBuf) -> Option<NamedFile> {
     NamedFile::open(Path::new("assets/css").join(file)).ok()
 }
 
+#[get("/js/<file..>")]
+fn js(file: PathBuf) -> Option<NamedFile> {
+    NamedFile::open(Path::new("assets/js").join(file)).ok()
+}
+
 #[get("/<file>")]
 fn post(file: String) -> Option<Template> {
     Some(Template::render("post", post::get(file)?))
@@ -68,7 +71,7 @@ fn main() {
         .attach(Template::fairing())
         .mount("/", routes![index, blog])
         .mount("/about", routes![about])
-        .mount("/assets/", routes![css, images, favicon])
+        .mount("/assets/", routes![css, images, favicon, js])
         .mount("/blog/", routes![post])
         .register(catchers![not_found])
         .launch();

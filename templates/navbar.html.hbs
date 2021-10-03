@@ -1,18 +1,3 @@
-<script>
-    // Load theme before all elements are loaded
-    const body = document.body;
-    const dark = body.getAttribute("dark")
-
-    const setTheme = (theme) => theme === "dark" ?
-        body.setAttribute("dark", true) :
-        body.removeAttribute("dark");
-
-    const setLocalStorage = (theme) => theme === "dark" ?
-        localStorage.setItem("theme", "dark") :
-        localStorage.removeItem("theme");
-
-    setTheme(localStorage.getItem("theme"));
-</script>
 <nav class="c-navbar" role="navigation">
     <a id="sun">
         <svg class="c-sun__svg" xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="100" height="100"
