@@ -244,6 +244,15 @@ a {
   border: 0.4rem solid var(--link-color);
 }
 
+.l-wrapper > * a,
+.l-wrapper > * a,
+.l-navbar__item > a,
+.l-navbar__item > a,
+.c-post-content > * a,
+.c-post-content > * a {
+  border: 0.4rem solid transparent; 
+}
+
 .c-post-content > h1 {
   font-size: 3.5rem;
 }
