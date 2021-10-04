@@ -58,6 +58,12 @@ pre {
     overflow-x: scroll;
 }
 
+code {
+    position: relative;
+    left: 1rem;
+    margin: 2rem 0;
+}
+
 h1,
 h2,
 h3,
