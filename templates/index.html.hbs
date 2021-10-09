@@ -1,26 +1,21 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <meta charset="UTF-8" />
-    <meta property="og:title" content="Home" />
-    <meta property="og:type" content="website" />
-    <meta property="og:site_name" content="Vale's blog" />
-    <meta property="og:description" content="Obscure technology, what would you expect">
-
-    <title>Vale's blog | obscure.technology</title>
-
-    <link rel="stylesheet" href="/css/style.css" media="all">
-</head>
-
-<body>
-    {{> sticky}}
-    <h3 class="post-item-note" aria-label="Recent Posts">Recent Posts</h3>
+{{#*inline "content"}}
+<div class="c-author">
+    {{!-- <img src="/assets/avatar.jpg" alt="Vale" class="c-author__image"> --}}
+    <h2 class="c-author__name">Valentin B.</h2>
+    <p class="c-author__bio">Student, programmer, InfoSec engineer, and occasional writer. I'm passionate about
+        the low-level and enjoy hacking all kinds of things. Using this blog to write down my thoughts on
+        various tech-related topics, hoping they will be useful and enjoyable for others.</p>
+</div>
+<main>
+    <h3 class="c-post-item-note" aria-label="Recent Posts">Recent Posts</h3>
     {{#each posts}}
-        <article class="post-item">
-            <span class="post-item-date">{{date}}</span>
-            <h4 class="post-item-title">
-                <a href="/blog/{{name}}">{{title}}</a>
-            </h4>
+    <article class="c-post-item">
+        <span class="c-post-item__date">{{date}}</span>
+        <h4 class="c-post-item__title">
+            <a href="/blog/{{name}}">{{title}}</a>
+        </h4>
+    </article>
     {{/each}}
-</body>
-</html>
+</main>
+{{/inline}}
+{{> layout}}

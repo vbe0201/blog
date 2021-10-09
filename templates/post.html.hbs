@@ -1,21 +1,13 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta property="og:title" content="{{post.title}}" />
-    <meta property="og:type" content="website" />
-    <meta property="og:site_name" content="Vale's blog" />
-    <meta property="og:description" content="Blog post from {{post.date}}">
-
-    <title>{{post.title}}</title>
-
-    <link rel="stylesheet" href="/css/style.css" media="all">
-</head>
-
-<body>
-    {{> sticky}}
-    <article>
+{{#*inline "content"}}
+{{!-- TODO: generate for every header a link as anchor_head --}}
+<header class="c-post-header">
+    <h1>{{{post.title}}}</h1>
+    <span>{{{post.date}}}</span>
+</header>
+<main arial-role="content">
+    <article class="c-post-content">
         {{{post.body}}}
     </article>
-</body>
-</html>
+</main>
+{{/inline}}
+{{> layout}}
